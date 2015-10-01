@@ -20,9 +20,9 @@ public class EndecaUpgradeStepDefs {
         this.endecaUpgrade = endecaUpgrade;
     }
 
-    @Given("^I open (.*) for (.*) and (.*)$")
+    @Given("^I open (.*) and (.*) at (.*)$")
     public void i_open_for_and_pages(
-            String pageNo, String url1, String url2)
+            String url1, String url2, String pageNo)
             throws Throwable {
         endecaUpgrade.openEndecaPage(url1, url2, pageNo);
     }

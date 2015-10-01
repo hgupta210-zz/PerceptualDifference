@@ -36,8 +36,8 @@ public class FileProcessing {
 
         for (int i = 0; i < listOfFiles.length; i++) {
             if (listOfFiles[i].isFile() && listOfFiles[i].getName().contains("html")) {
-                // System.out.println("File " + listOfFiles[i].getName());
-                results.add(listOfFiles[i].getAbsolutePath());
+                // results.add(listOfFiles[i].getAbsolutePath());
+                results.add(listOfFiles[i].getName());
             }
         }
         String text =
@@ -47,8 +47,8 @@ public class FileProcessing {
             String[] splitName = filename.split("_");
             String percentDiff = splitName[splitName.length - 1].replaceAll(".html", "");
             text =
-                    text + "<tr><td>" + scenarioName + "</td><td>" + percentDiff + "</td><td><a href=\"" + filename
-                            + "\">Report</a></td><td></tr>";
+                    text + "<tr><td>" + scenarioName + "</td><td>" + percentDiff + "</td><td><a href=screenshots/"
+                            + filename + ">Report</a></td><td></tr>";
         }
         text = text + "</table></center><br/><br/></body></html>";
         generateExecutionReport(text);
