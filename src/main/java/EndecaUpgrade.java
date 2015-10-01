@@ -24,10 +24,10 @@ public class EndecaUpgrade {
     }
 
     public void openEndecaPage(
-            String oldEndeca, String newEndeca, String pageNo)
+            String url1, String url2, String pageNo)
             throws Throwable {
-        wD1.get(oldEndeca);
-        wD2.get(newEndeca);
+        wD1.get(url1);
+        wD2.get(url2);
         imageProcessing.saveScreenshot(pageNo);
     }
 

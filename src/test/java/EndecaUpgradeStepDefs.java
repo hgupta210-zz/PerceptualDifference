@@ -20,11 +20,11 @@ public class EndecaUpgradeStepDefs {
         this.endecaUpgrade = endecaUpgrade;
     }
 
-    @Given("^I open (.*) for (.*) and (.*) pages$")
+    @Given("^I open (.*) for (.*) and (.*)$")
     public void i_open_for_and_pages(
-            String pageNo, String oldEndeca, String newEndeca)
+            String pageNo, String url1, String url2)
             throws Throwable {
-        endecaUpgrade.openEndecaPage(oldEndeca, newEndeca, pageNo);
+        endecaUpgrade.openEndecaPage(url1, url2, pageNo);
     }
 
     @Then("^I should see comparison for (.*)$")

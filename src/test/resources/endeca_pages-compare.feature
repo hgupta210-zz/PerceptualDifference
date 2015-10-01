@@ -5,7 +5,7 @@ Feature: Compare Endeca pages
 
   @complete1
   Scenario Outline: Compare old and new endeca pages
-    When I open <Page No> for <old endeca> and <new endeca> pages
+    When I open <Page No> for <old endeca> and <new endeca>
     Then I should see comparison for <Page No>
 
     Examples: 
