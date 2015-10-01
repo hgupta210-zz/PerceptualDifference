@@ -131,13 +131,14 @@ public class ImageProcessing {
             }
         }
         double n = width * height;
-        double p = diff / n / 255.0;
+        double p = (diff / n / 255.0) * 100;
+        p = Math.round(p * 100.0) / 100.0;
         // System.out.println("diff percent: " + (p * 100.0));
         File outputfile = new File(fileName3);
         ImageIO.write(img3, "png", outputfile);
         ImageIO.write(img4, "png", combinedImageFile);
         // createPackageImage(productType);
-        fileProcessing.generateHtml(productType, (p * 100));
+        fileProcessing.generateHtml(productType, p);
     }
 
     public void saveScreenshot(
