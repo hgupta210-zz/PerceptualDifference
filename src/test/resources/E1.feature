@@ -9,6 +9,10 @@ Feature: Compare Endeca pages
     Then I should see comparison for <S_No>
 
     Examples: 
-      | S_No   | url1                  | url2                  |
-      | Page_1 | http://www.yahoo.com  | http://www.yahoo.com  |
-      #| Page_2 | http://www.google.com | http://www.google.com |
+      | S_No   | url1                            | url2                            |
+     # | Page_1 | http://www.yahoo.com  | http://www.yahoo.com  |
+      | Page_2 | http://www.google.com | http://www.google.com |
+      | Page_3 | http://www.marksandspencer.com/ | http://www.marksandspencer.com/ |
+      | Page_4 | http://www.marksandspencer.com/ | http://www.marksandspencer.com/ |
+      | Page_5 | http://www.marksandspencer.com/ | http://www.marksandspencer.com/ |
+      | Page_6 | http://www.marksandspencer.com/ | http://www.sit2.marksandspencer.com/ |

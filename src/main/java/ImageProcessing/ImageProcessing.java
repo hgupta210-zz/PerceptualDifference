@@ -4,12 +4,15 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
 import juice.driverInterface;
 
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -23,6 +26,8 @@ public class ImageProcessing {
     private WebDriver wD1, wD2;
     private FileProcessing fileProcessing;
     private siteContext context;
+
+    private static final String PAGE_BODY_KEY = "page.body";
 
     @Inject
     public ImageProcessing(driverInterface d, FileProcessing fileProcessing, siteContext context) {
@@ -130,7 +135,7 @@ public class ImageProcessing {
                 }
             }
         }
-        double n = width * height;
+        double n = width * height * 1.3;
         double p = (diff / n / 255.0) * 100;
         p = Math.round(p * 100.0) / 100.0;
         // System.out.println("diff percent: " + (p * 100.0));
@@ -144,12 +149,104 @@ public class ImageProcessing {
     public void saveScreenshot(
             String product)
             throws IOException {
-        String fileName1 = "target\\screenshots\\" + product + "1.png";
-        String fileName2 = "target\\screenshots\\" + product + "2.png";
-        File scrFile = ((TakesScreenshot) wD1).getScreenshotAs(OutputType.FILE);
+        if (System.getProperty("browser").equals("Chrome")) {
+            saveChromeScreenshot(product, wD1, 1);
+            saveChromeScreenshot(product, wD2, 2);
+        } else {
+            String fileName1 = "target\\screenshots\\" + product + "1.png";
+            String fileName2 = "target\\screenshots\\" + product + "2.png";
+            File scrFile = ((TakesScreenshot) wD1).getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(scrFile, new File(fileName1));
+            File scrFile2 = ((TakesScreenshot) wD2).getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(scrFile2, new File(fileName2));
+        }
+    }
+
+    public void saveChromeScreenshot(
+            String product, WebDriver driver, int position)
+            throws IOException {
+        int noOfScreens = 1;
+
+        String fileName1 = "target\\screenshots\\" + product + "_" + noOfScreens + "_" + position + ".png";
+        File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(scrFile, new File(fileName1));
-        File scrFile2 = ((TakesScreenshot) wD2).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(scrFile2, new File(fileName2));
+
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        Long totalPageHeight = (Long) jse.executeScript("return document.body.scrollHeight;");
+
+        // int viewHeight =
+        // wD1.findElement(By.cssSelector((String) context.getLocatorsMap().get(PAGE_BODY_KEY))).getSize()
+        // .getHeight();
+
+        int viewHeight = 710;
+        int height = viewHeight;
+        do {
+            jse.executeScript("scroll(0, " + height + ")");
+            height = height + viewHeight;
+            noOfScreens++;
+            fileName1 = "target\\screenshots\\" + product + "_" + noOfScreens + "_" + position + ".png";
+            scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(scrFile, new File(fileName1));
+
+        } while (height < totalPageHeight);
+
+        File folder = new File("target\\screenshots");
+        File[] listOfFiles = folder.listFiles();
+        List<File> results = new ArrayList<File>();
+
+        String fileName4 = "target\\screenshots\\" + product + position + ".png";
+        File fullImageFile = new File(fileName4);
+        Boolean flag = true;
+        BufferedImage img4 = null;
+        // int x = 0, y = 0;
+        int length = 0;
+
+        for (File allFiles : listOfFiles) {
+            if (allFiles.getName().contains(product))
+                results.add(allFiles);
+        }
+
+        for (int i = 0; i < results.size(); i++) {
+            String pattern = i + 1 + "_" + position + ".png";
+            // System.out.println(listOfFiles[i].getName());
+            // System.out.println(pattern);
+            // if (listOfFiles[i].isFile() && listOfFiles[i].getName().contains(pattern)) {
+            for (File flName : results)
+                if (flName.getName().contains(pattern)) {
+
+                    String fileCopy = flName.getAbsolutePath();
+                    BufferedImage img1 = null;
+
+                    try {
+                        File file1 = new File(fileCopy);
+
+                        img1 = ImageIO.read(file1);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    int width1 = img1.getWidth(null);
+                    int height1 = img1.getHeight(null);
+                    if (flag) {
+                        img4 = new BufferedImage(width1, height, BufferedImage.TYPE_INT_ARGB);
+                        flag = false;
+                    }
+
+                    for (int y = 0; y < height1; y++) {
+                        for (int x = 0; x < width1; x++) {
+                            int rgb1;
+                            if (x < width1 && y < height) {
+                                rgb1 = img1.getRGB(x, y);
+                                img4.setRGB(x, length, rgb1);
+                            }
+                        }
+                        length++;
+                    }
+
+                }
+        }
+        ImageIO.write(img4, "png", fullImageFile);
+
     }
 
     public void createPackageImage(

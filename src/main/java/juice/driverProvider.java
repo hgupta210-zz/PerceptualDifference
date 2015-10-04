@@ -17,8 +17,6 @@ public class driverProvider implements Provider<driverInterface> {
     }
 
     public driverInterface get() {
-
-        System.out.println(System.getProperty("browser"));
         if (System.getProperty("browser").equals("Chrome"))
             return chromeWebDriver;
         else

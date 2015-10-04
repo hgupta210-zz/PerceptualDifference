@@ -21,7 +21,6 @@ public class ChromeWebDriver implements driverInterface {
             System.setProperty("webdriver.chrome.driver",
                     "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe");
             wd1 = new ChromeDriver();
-            wd1.get("http://www.google.com");
         }
         return wd1;
     }
@@ -31,7 +30,6 @@ public class ChromeWebDriver implements driverInterface {
             System.setProperty("webdriver.chrome.driver",
                     "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe");
             wd2 = new ChromeDriver();
-            wd2.get("http://www.google.com");
         }
         return wd2;
     }
