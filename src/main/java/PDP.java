@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import juice.driverClass;
+import juice.driverInterface;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -27,7 +27,7 @@ public class PDP {
     private static final String HEADER_GO_BUTTON_KEY = "header.go-button";
 
     @Inject
-    public PDP(driverClass d, ImageProcessing imageProcessing, siteContext context) {
+    public PDP(driverInterface d, ImageProcessing imageProcessing, siteContext context) {
         this.wD1 = d.getDriver1();
         this.wD2 = d.getDriver2();
         this.imageProcessing = imageProcessing;

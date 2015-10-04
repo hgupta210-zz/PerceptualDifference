@@ -7,7 +7,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import juice.driverClass;
+import juice.driverInterface;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -25,7 +25,7 @@ public class ImageProcessing {
     private siteContext context;
 
     @Inject
-    public ImageProcessing(driverClass d, FileProcessing fileProcessing, siteContext context) {
+    public ImageProcessing(driverInterface d, FileProcessing fileProcessing, siteContext context) {
         // this.webDriver = webDriver;
         // super();
 

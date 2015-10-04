@@ -1,6 +1,6 @@
 import java.io.FileNotFoundException;
 
-import juice.driverClass;
+import juice.driverInterface;
 
 import org.openqa.selenium.WebDriver;
 
@@ -21,7 +21,7 @@ public class setup {
     private static boolean dunit = false;
 
     @Inject
-    public setup(driverClass d, FileProcessing fileProcessing, Locators locators, siteContext context) {
+    public setup(driverInterface d, FileProcessing fileProcessing, Locators locators, siteContext context) {
         this.wD1 = d.getDriver1();
         this.wD2 = d.getDriver2();
         this.fileProcessing = fileProcessing;
@@ -39,9 +39,9 @@ public class setup {
         if (!dunit) {
             Runtime.getRuntime().addShutdownHook(new Thread() {
                 public void run() {
-                    wD1.close();
-                    wD2.close();
                     fileProcessing.generateReport("Endeca Upgrade scenarios");
+                    wD1.quit();
+                    wD2.quit();
                     return;
                 }
             });

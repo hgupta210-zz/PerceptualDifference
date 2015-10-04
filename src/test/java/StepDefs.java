@@ -1,4 +1,5 @@
-import juice.driverClass;
+import juice.FirefoxWebDriver;
+import juice.driverInterface;
 import ImageProcessing.ImageProcessing;
 
 import com.google.inject.Inject;
@@ -11,11 +12,11 @@ import cucumber.runtime.java.guice.ScenarioScoped;
 public class StepDefs {
     private final PDP pDP;
     private final test test1;
-    private driverClass d;
+    private FirefoxWebDriver d;
     private ImageProcessing imageProcessing;
 
     @Inject
-    public StepDefs(driverClass d, PDP pDP, test test1, ImageProcessing imageProcessing) {
+    public StepDefs(driverInterface d, PDP pDP, test test1, ImageProcessing imageProcessing) {
         super();
         this.pDP = pDP;
         this.test1 = test1;

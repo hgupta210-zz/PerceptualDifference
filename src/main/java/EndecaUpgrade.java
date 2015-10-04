@@ -1,4 +1,4 @@
-import juice.driverClass;
+import juice.driverInterface;
 
 import org.openqa.selenium.WebDriver;
 
@@ -16,7 +16,7 @@ public class EndecaUpgrade {
     private siteContext context;
 
     @Inject
-    public EndecaUpgrade(driverClass d, ImageProcessing imageProcessing, siteContext context) {
+    public EndecaUpgrade(driverInterface d, ImageProcessing imageProcessing, siteContext context) {
         this.wD1 = d.getDriver1();
         this.wD2 = d.getDriver2();
         this.imageProcessing = imageProcessing;

@@ -1,4 +1,5 @@
-import juice.driverClass;
+import juice.FirefoxWebDriver;
+import juice.driverInterface;
 import ImageProcessing.ImageProcessing;
 
 import com.google.inject.Inject;
@@ -9,12 +10,12 @@ import cucumber.runtime.java.guice.ScenarioScoped;
 
 @ScenarioScoped
 public class EndecaUpgradeStepDefs {
-    private driverClass d;
+    private FirefoxWebDriver d;
     private ImageProcessing imageProcessing;
     private EndecaUpgrade endecaUpgrade;
 
     @Inject
-    public EndecaUpgradeStepDefs(driverClass d, ImageProcessing imageProcessing, EndecaUpgrade endecaUpgrade) {
+    public EndecaUpgradeStepDefs(driverInterface d, ImageProcessing imageProcessing, EndecaUpgrade endecaUpgrade) {
         super();
         this.imageProcessing = imageProcessing;
         this.endecaUpgrade = endecaUpgrade;

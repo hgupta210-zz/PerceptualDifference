@@ -10,5 +10,5 @@ Feature: Compare Endeca pages
 
     Examples: 
       | S_No   | url1                  | url2                  |
-      | Page_1 | http://www.yahoo.com  | http://www.google.com |
-      | Page_2 | http://www.google.com | http://www.google.com |
+      | Page_1 | http://www.yahoo.com  | http://www.yahoo.com  |
+      #| Page_2 | http://www.google.com | http://www.google.com |
