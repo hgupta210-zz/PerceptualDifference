@@ -148,7 +148,7 @@ public class ImageProcessing {
 
     public void saveScreenshot(
             String product)
-            throws IOException {
+            throws IOException, InterruptedException {
         if (System.getProperty("browser").equals("Chrome")) {
             saveChromeScreenshot(product, wD1, 1);
             saveChromeScreenshot(product, wD2, 2);
@@ -164,12 +164,13 @@ public class ImageProcessing {
 
     public void saveChromeScreenshot(
             String product, WebDriver driver, int position)
-            throws IOException {
+            throws IOException, InterruptedException {
         int noOfScreens = 1;
 
         String fileName1 = "target\\screenshots\\" + product + "_" + noOfScreens + "_" + position + ".png";
         File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(scrFile, new File(fileName1));
+        scrFile.delete();
 
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         Long totalPageHeight = (Long) jse.executeScript("return document.body.scrollHeight;");
@@ -180,15 +181,17 @@ public class ImageProcessing {
 
         int viewHeight = 710;
         int height = viewHeight;
-        do {
+        while (height < totalPageHeight) {
+            Thread.sleep(400);
             jse.executeScript("scroll(0, " + height + ")");
+            Thread.sleep(600);
             height = height + viewHeight;
             noOfScreens++;
             fileName1 = "target\\screenshots\\" + product + "_" + noOfScreens + "_" + position + ".png";
-            scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-            FileUtils.copyFile(scrFile, new File(fileName1));
-
-        } while (height < totalPageHeight);
+            File scrFile2 = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(scrFile2, new File(fileName1));
+            scrFile2.delete();
+        }
 
         File folder = new File("target\\screenshots");
         File[] listOfFiles = folder.listFiles();
