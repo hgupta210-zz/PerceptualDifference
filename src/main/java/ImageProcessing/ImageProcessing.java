@@ -9,7 +9,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-import juice.driverInterface;
+import juice.DriverInterface;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.JavascriptExecutor;
@@ -26,15 +26,12 @@ public class ImageProcessing {
     private WebDriver wD1, wD2;
     private FileProcessing fileProcessing;
     private siteContext context;
+    private DriverInterface d;
 
     private static final String PAGE_BODY_KEY = "page.body";
 
     @Inject
-    public ImageProcessing(driverInterface d, FileProcessing fileProcessing, siteContext context) {
-        // this.webDriver = webDriver;
-        // super();
-
-        // this.wD2 = wD2.get();
+    public ImageProcessing(DriverInterface d, FileProcessing fileProcessing, siteContext context) {
         this.wD1 = d.getDriver1();
         this.wD2 = d.getDriver2();
         this.fileProcessing = fileProcessing;
@@ -167,11 +164,6 @@ public class ImageProcessing {
             throws IOException, InterruptedException {
         int noOfScreens = 1;
 
-        String fileName1 = "target\\screenshots\\" + product + "_" + noOfScreens + "_" + position + ".png";
-        File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(scrFile, new File(fileName1));
-        scrFile.delete();
-
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         Long totalPageHeight = (Long) jse.executeScript("return document.body.scrollHeight;");
 
@@ -179,18 +171,19 @@ public class ImageProcessing {
         // wD1.findElement(By.cssSelector((String) context.getLocatorsMap().get(PAGE_BODY_KEY))).getSize()
         // .getHeight();
 
-        int viewHeight = 710;
+        int viewHeight = 709;
         int height = viewHeight;
         while (height < totalPageHeight) {
+            String fileName1 = "target\\screenshots\\" + product + "_" + noOfScreens + "_" + position + ".png";
+            File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(scrFile, new File(fileName1));
+            scrFile.delete();
+
             Thread.sleep(400);
             jse.executeScript("scroll(0, " + height + ")");
             Thread.sleep(600);
             height = height + viewHeight;
             noOfScreens++;
-            fileName1 = "target\\screenshots\\" + product + "_" + noOfScreens + "_" + position + ".png";
-            File scrFile2 = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-            FileUtils.copyFile(scrFile2, new File(fileName1));
-            scrFile2.delete();
         }
 
         File folder = new File("target\\screenshots");
@@ -201,7 +194,7 @@ public class ImageProcessing {
         File fullImageFile = new File(fileName4);
         Boolean flag = true;
         BufferedImage img4 = null;
-        // int x = 0, y = 0;
+
         int length = 0;
 
         for (File allFiles : listOfFiles) {
@@ -211,9 +204,6 @@ public class ImageProcessing {
 
         for (int i = 0; i < results.size(); i++) {
             String pattern = i + 1 + "_" + position + ".png";
-            // System.out.println(listOfFiles[i].getName());
-            // System.out.println(pattern);
-            // if (listOfFiles[i].isFile() && listOfFiles[i].getName().contains(pattern)) {
             for (File flName : results)
                 if (flName.getName().contains(pattern)) {
 
@@ -245,11 +235,9 @@ public class ImageProcessing {
                         }
                         length++;
                     }
-
                 }
         }
         ImageIO.write(img4, "png", fullImageFile);
-
     }
 
     public void createPackageImage(

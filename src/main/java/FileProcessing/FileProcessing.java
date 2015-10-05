@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import juice.driverInterface;
 import SiteContext.siteContext;
 
 import com.google.inject.Inject;
@@ -16,9 +15,9 @@ public class FileProcessing {
     private siteContext context;
 
     @Inject
-    public FileProcessing(driverInterface d, siteContext context) {
+    public FileProcessing(siteContext context) {
 
-        super();
+        // super();
 
         this.context = context;
     }

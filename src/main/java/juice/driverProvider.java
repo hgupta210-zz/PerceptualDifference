@@ -3,23 +3,23 @@ package juice;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class driverProvider implements Provider<driverInterface> {
+public class DriverProvider implements Provider<DriverInterface> {
 
     @Inject
-    private FirefoxWebDriver firefoxdriver;
+    private FirefoxWebDriver firefoxDriver;
 
     @Inject
     private ChromeWebDriver chromeWebDriver;
 
     @Inject
-    public driverProvider() {
-        super();
+    public DriverProvider() {
+        // super();
     }
 
-    public driverInterface get() {
+    public DriverInterface get() {
         if (System.getProperty("browser").equals("Chrome"))
             return chromeWebDriver;
         else
-            return firefoxdriver;
+            return firefoxDriver;
     }
 }

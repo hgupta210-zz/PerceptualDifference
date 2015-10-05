@@ -1,6 +1,6 @@
 import java.io.FileNotFoundException;
 
-import juice.driverInterface;
+import juice.DriverInterface;
 
 import org.openqa.selenium.WebDriver;
 
@@ -17,13 +17,14 @@ public class setup {
     private FileProcessing fileProcessing;
     private Locators locators;
     private siteContext context;
+    private DriverInterface dr;
     private static boolean cleanFlag = false;
     private static boolean dunit = false;
 
     @Inject
-    public setup(driverInterface d, FileProcessing fileProcessing, Locators locators, siteContext context) {
-        this.wD1 = d.getDriver1();
-        this.wD2 = d.getDriver2();
+    public setup(DriverInterface dr, FileProcessing fileProcessing, Locators locators, siteContext context) {
+        this.wD1 = dr.getDriver1();
+        this.wD2 = dr.getDriver2();
         this.fileProcessing = fileProcessing;
         this.locators = locators;
         this.context = context;

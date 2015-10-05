@@ -7,7 +7,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
-public class ChromeWebDriver implements driverInterface {
+public class ChromeWebDriver implements DriverInterface {
     private WebDriver wd1;
     private WebDriver wd2;
 
