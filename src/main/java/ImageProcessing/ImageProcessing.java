@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+
 import juice.DriverType;
 
 import org.apache.commons.io.FileUtils;
@@ -169,8 +170,11 @@ public class ImageProcessing {
         // int viewHeight =
         // wD1.findElement(By.cssSelector((String) context.getLocatorsMap().get(PAGE_BODY_KEY))).getSize()
         // .getHeight();
-
-        int viewHeight = 709;
+        
+        //int viewHeight = 709;
+        Long t = (Long) jse.executeScript("return window.screen.availHeight;");
+        int viewHeight = t.intValue();
+        //System.out.println(viewHeight);
         int height = viewHeight;
         while (height < totalPageHeight) {
             String fileName1 = "target/screenshots/" + product + "_" + noOfScreens + "_" + position + ".png";
