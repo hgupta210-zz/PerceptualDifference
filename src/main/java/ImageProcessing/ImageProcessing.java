@@ -8,8 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
-
-import juice.DriverInterface;
+import juice.DriverType;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.JavascriptExecutor;
@@ -26,12 +25,12 @@ public class ImageProcessing {
     private WebDriver wD1, wD2;
     private FileProcessing fileProcessing;
     private siteContext context;
-    private DriverInterface d;
+    private DriverType d;
 
     private static final String PAGE_BODY_KEY = "page.body";
 
     @Inject
-    public ImageProcessing(DriverInterface d, FileProcessing fileProcessing, siteContext context) {
+    public ImageProcessing(DriverType d, FileProcessing fileProcessing, siteContext context) {
         this.wD1 = d.getDriver1();
         this.wD2 = d.getDriver2();
         this.fileProcessing = fileProcessing;
@@ -41,10 +40,10 @@ public class ImageProcessing {
     public void isImagesSame(
             String productType)
             throws IOException {
-        String fileName1 = "target\\screenshots\\" + productType + "1.png";
-        String fileName2 = "target\\screenshots\\" + productType + "2.png";
-        String fileName3 = "target\\screenshots\\diff_" + productType + ".png";
-        String fileName4 = "target\\screenshots\\combined_" + productType + ".png";
+        String fileName1 = "target/screenshots/" + productType + "1.png";
+        String fileName2 = "target/screenshots/" + productType + "2.png";
+        String fileName3 = "target/screenshots/diff_" + productType + ".png";
+        String fileName4 = "target/screenshots/combined_" + productType + ".png";
         File combinedImageFile = new File(fileName4);
 
         BufferedImage img1 = null;
@@ -150,8 +149,8 @@ public class ImageProcessing {
             saveChromeScreenshot(product, wD1, 1);
             saveChromeScreenshot(product, wD2, 2);
         } else {
-            String fileName1 = "target\\screenshots\\" + product + "1.png";
-            String fileName2 = "target\\screenshots\\" + product + "2.png";
+            String fileName1 = "target/screenshots/" + product + "1.png";
+            String fileName2 = "target/screenshots/" + product + "2.png";
             File scrFile = ((TakesScreenshot) wD1).getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(scrFile, new File(fileName1));
             File scrFile2 = ((TakesScreenshot) wD2).getScreenshotAs(OutputType.FILE);
@@ -174,7 +173,7 @@ public class ImageProcessing {
         int viewHeight = 709;
         int height = viewHeight;
         while (height < totalPageHeight) {
-            String fileName1 = "target\\screenshots\\" + product + "_" + noOfScreens + "_" + position + ".png";
+            String fileName1 = "target/screenshots/" + product + "_" + noOfScreens + "_" + position + ".png";
             File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(scrFile, new File(fileName1));
             scrFile.delete();
@@ -186,11 +185,11 @@ public class ImageProcessing {
             noOfScreens++;
         }
 
-        File folder = new File("target\\screenshots");
+        File folder = new File("target/screenshots");
         File[] listOfFiles = folder.listFiles();
         List<File> results = new ArrayList<File>();
 
-        String fileName4 = "target\\screenshots\\" + product + position + ".png";
+        String fileName4 = "target/screenshots/" + product + position + ".png";
         File fullImageFile = new File(fileName4);
         Boolean flag = true;
         BufferedImage img4 = null;
@@ -243,9 +242,9 @@ public class ImageProcessing {
     public void createPackageImage(
             String productType)
             throws IOException {
-        String fileName1 = "target\\screenshots\\" + productType + "1.png";
-        String fileName2 = "target\\screenshots\\" + productType + "2.png";
-        String fileName3 = "target\\screenshots\\combined_" + productType + ".png";
+        String fileName1 = "target/screenshots/" + productType + "1.png";
+        String fileName2 = "target/screenshots/" + productType + "2.png";
+        String fileName3 = "target/screenshots/combined_" + productType + ".png";
         File outputfile = new File(fileName3);
 
         BufferedImage img1 = null;

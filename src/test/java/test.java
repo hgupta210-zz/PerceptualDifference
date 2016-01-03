@@ -1,4 +1,5 @@
-import juice.DriverInterface;
+
+import juice.DriverType;
 
 import org.openqa.selenium.WebDriver;
 
@@ -8,7 +9,7 @@ public class test {
     private WebDriver wD1, wD2;
 
     @Inject
-    public test(DriverInterface d) {
+    public test(DriverType d) {
         this.wD1 = d.getDriver1();
         this.wD2 = d.getDriver2();
     }

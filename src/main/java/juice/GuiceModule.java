@@ -8,7 +8,7 @@ public final class GuiceModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        bind(DriverInterface.class).toProvider(DriverProvider.class).in(CucumberScopes.SCENARIO);
+        bind(DriverType.class).toProvider(BrowserProvider.class).in(CucumberScopes.SCENARIO);
 
     }
 }

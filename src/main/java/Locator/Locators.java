@@ -33,7 +33,7 @@ public class Locators {
 
     public InputStream load()
             throws FileNotFoundException {
-        InputStream input = new FileInputStream(new File("src\\test\\resources\\config\\locator.yml"));
+        InputStream input = new FileInputStream(new File("src/test/resources/config/locator.yml"));
         return input;
     }
 }

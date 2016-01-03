@@ -1,5 +1,5 @@
+import juice.DriverType;
 import juice.FirefoxWebDriver;
-import juice.DriverInterface;
 import ImageProcessing.ImageProcessing;
 
 import com.google.inject.Inject;
@@ -16,7 +16,7 @@ public class StepDefs {
     private ImageProcessing imageProcessing;
 
     @Inject
-    public StepDefs(DriverInterface d, PDP pDP, test test1, ImageProcessing imageProcessing) {
+    public StepDefs(DriverType d, PDP pDP, test test1, ImageProcessing imageProcessing) {
         super();
         this.pDP = pDP;
         this.test1 = test1;

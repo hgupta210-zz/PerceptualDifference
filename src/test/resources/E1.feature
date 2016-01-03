@@ -13,6 +13,6 @@ Feature: Compare Endeca pages
      # | Page_1 | http://www.yahoo.com  | http://www.yahoo.com  |
      # | Page_2 | http://www.google.com | http://www.google.com |
       |Page_3 | http://www.marksandspencer.com/ | http://www.marksandspencer.com/ |
-      |Page_4 | http://www.marksandspencer.com/ | http://www.marksandspencer.com/ |
+      #|Page_4 | http://www.marksandspencer.com/ | http://www.marksandspencer.com/ |
       
       

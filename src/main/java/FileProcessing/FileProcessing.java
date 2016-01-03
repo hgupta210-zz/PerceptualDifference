@@ -29,7 +29,7 @@ public class FileProcessing {
          * file.delete(); Thread.sleep(1500); } catch (InterruptedException e) { e.printStackTrace(); }
          */
 
-        File folder = new File("target\\screenshots");
+        File folder = new File("target/screenshots/");
         File[] listOfFiles = folder.listFiles();
         List<String> results = new ArrayList<String>();
 
@@ -55,7 +55,7 @@ public class FileProcessing {
 
     public void generateExecutionReport(
             String text) {
-        File file = new File("target\\ExecutionReport.html");
+        File file = new File("target/ExecutionReport.html");
         try {
             file.createNewFile();
         } catch (IOException e) {
@@ -78,7 +78,7 @@ public class FileProcessing {
 
     public void cleanReports() {
         createDirectory();
-        File folder = new File("target\\screenshots");
+        File folder = new File("target/screenshots/");
         File[] listOfFiles = folder.listFiles();
 
         for (int i = 0; i < listOfFiles.length; i++) {
@@ -87,7 +87,7 @@ public class FileProcessing {
             }
         }
 
-        File file = new File("target\\ExecutionReport.html");
+        File file = new File("target/ExecutionReport.html");
         if (file.exists())
             file.delete();
 
@@ -123,13 +123,13 @@ public class FileProcessing {
 
     public void generateProductReport(
             String text, String productType, float diffPercent) {
-        String fileName = "target\\screenshots\\" + productType + "_" + diffPercent + ".html";
+        String fileName = "target/screenshots/" + productType + "_" + diffPercent + ".html";
         File file = new File(fileName);
         writeFile(file, text);
     }
 
     public void createDirectory() {
-        File file = new File("target\\screenshots");
+        File file = new File("target/screenshots/");
         if (!file.exists()) {
             if (file.mkdir()) {
             } else
